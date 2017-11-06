@@ -58,14 +58,13 @@ public class RoutineActivity extends Activity {
     private Dialog createDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         LayoutInflater inflater = this.getLayoutInflater();
-
         builder.setView(inflater.inflate(R.layout.create_routine_layout,null))
                 .setPositiveButton(R.string.create, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                      //Save to DB
-                        EditText routineInput = (EditText) findViewById(R.id.routineInput);
-                        Log.d("Create a routine", "Saving"+ routineInput+ " into DB");
+                        EditText routineInput = (EditText) createRoutineDialog.findViewById(R.id.routineInput);
+                        Log.d("Create a routine", "Saving "+ routineInput.getText()+ " into DB");
                     }
                 })
                 .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
