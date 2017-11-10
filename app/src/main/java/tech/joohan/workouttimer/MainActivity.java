@@ -17,8 +17,8 @@ public class MainActivity extends Activity {
         routineButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent routineIntent = new Intent(MainActivity.this, RoutineActivity.class);
-                MainActivity.this.startActivity(routineIntent);
+                Intent routineListIntent = new Intent(MainActivity.this, RoutineListActivity.class);
+                MainActivity.this.startActivity(routineListIntent);
             }
         });
 

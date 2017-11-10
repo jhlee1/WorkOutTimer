@@ -16,9 +16,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".WorkoutActivity" />
-        <activity android:name=".RoutineActivity" />
+        <activity android:name=".RoutineListActivity" />
         <activity android:name=".HistoryActivity" />
-        <activity android:name=".CircuitTrainingActivity"></activity>
+        <activity android:name=".CircuitTrainingActivity" />
+        <activity android:name=".RoutineActivity"></activity>
     </application>
 
 </manifest>

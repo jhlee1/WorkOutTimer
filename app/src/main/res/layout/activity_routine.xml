@@ -1,36 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.widget.RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
     android:background="@color/white"
+    android:layout_margin="3dp"
     tools:context="tech.joohan.workouttimer.RoutineActivity">
 
 
     <LinearLayout
-            android:gravity="center"
-            android:orientation="vertical"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/mainActivityBackground"
+            android:orientation="horizontal"
+            android:layout_marginBottom="10dp"
             >
-            <TextView
-                android:id="@+id/routineTitle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Routines"
-                android:textSize="50dp"
-                android:background="@color/mainActivityBackground"
-                android:textAlignment="center"
-                android:layout_marginBottom="10dp"
-
+        <TextView
+            android:id="@+id/routineName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Fake Routine"
+            android:textSize="50sp"
+            />
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"
                 />
+            <ImageView
+                android:id="@+id/addExercise"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:padding="5dp"
+                android:src="@drawable/add_button_24dp"/>
+                />
+        </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:weightSum="1"
             android:gravity="center"
             android:orientation="vertical">
             <ListView
@@ -39,16 +55,8 @@
                 android:dividerHeight="5dp"
                 android:background="@color/mainActivityBackground"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="0.9"/>
-            <ImageView
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:id="@+id/addRoutine"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:src="@drawable/add_button"
-                android:layout_weight="0.1"/>
+                android:layout_height="match_parent"/>
+
         </LinearLayout>
 
     </LinearLayout>
