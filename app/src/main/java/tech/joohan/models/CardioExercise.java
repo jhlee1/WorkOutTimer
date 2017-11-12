@@ -1,9 +1,11 @@
 package tech.joohan.models;
 
 
+import android.os.Parcel;
+
 public class CardioExercise extends Exercise {
     long kilometers;
-    long time;
-
+    int mins;
+    int secs;
 
 }

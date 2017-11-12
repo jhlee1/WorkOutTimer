@@ -7,9 +7,28 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Routine implements Serializable {
-    String name;
-    List<Exercise> exercises;
+public class Routine implements Parcelable {
+    private String name;
+    private List<Exercise> exercises;
+
+    protected Routine(Parcel in) {
+        this.name = in.readString();
+        this.exercises = in.readArrayList(Exercise.class.getClassLoader());
+    }
+
+
+
+    public static final Creator<Routine> CREATOR = new Creator<Routine>() {
+        @Override
+        public Routine createFromParcel(Parcel in) {
+            return new Routine(in);
+        }
+
+        @Override
+        public Routine[] newArray(int size) {
+            return new Routine[size];
+        }
+    };
 
     public String getName() {
         return name;
@@ -37,4 +56,14 @@ public class Routine implements Serializable {
         this.exercises = exercises;
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(this.name);
+        parcel.writeList(this.exercises);
+    }
 }
