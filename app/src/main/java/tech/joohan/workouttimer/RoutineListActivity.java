@@ -25,7 +25,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import tech.joohan.models.Exercise;
 import tech.joohan.models.Routine;
+import tech.joohan.models.WeightTraining;
 
 public class RoutineListActivity extends Activity {
     private RoutineListAdapter routineListAdapter;
@@ -40,13 +42,19 @@ public class RoutineListActivity extends Activity {
         routineFileName = getResources().getString(R.string.routine_filename);
         FileInputStream inputStream = null;
         gson = new GsonBuilder().create();
-        routines = new ArrayList<>();
-
         try {
             inputStream = this.openFileInput(routineFileName);
             Scanner s = new Scanner(inputStream);
             Type listType = new TypeToken<ArrayList<Routine>>(){}.getType();
-            routines = gson.fromJson(s.useDelimiter("\\A").next(),listType);
+            String input = null;
+            if (s.hasNext()) {
+                input = s.useDelimiter("\\A").next();
+
+                routines = gson.fromJson(input, listType);
+            } else {
+                routines = new ArrayList<>();
+            }
+
         } catch (IOException e ) {
             try {
                 FileOutputStream outputStream = openFileOutput(routineFileName, this.MODE_PRIVATE);
@@ -58,6 +66,13 @@ public class RoutineListActivity extends Activity {
 
             }
         }
+        //Just for testing purpose
+        Routine tmp = new Routine("Testing1");
+        Exercise tmp2 = new WeightTraining();
+        tmp2.setName("Test Exercise");
+        tmp.getExercises().add(tmp2);
+        routines.add(tmp);
+
         ListView listView = (ListView) findViewById(R.id.routineList);
         routineListAdapter = new RoutineListAdapter(this,routines);
         listView.setAdapter(routineListAdapter);

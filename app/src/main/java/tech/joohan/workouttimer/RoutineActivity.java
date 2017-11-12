@@ -18,10 +18,14 @@ public class RoutineActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_routine);
         Intent intent = getIntent();
-        Routine r = (Routine) intent.getSerializableExtra("routine");
+        Routine routine = (Routine) intent.getParcelableExtra("routine");
         TextView routineName = (TextView) findViewById(R.id.routineName);
-        routineName.setText(r.getName());
+        routineName.setText(routine.getName());
         ArrayList<Routine> routines = intent.getParcelableArrayListExtra("routines");
+        for(Routine r : routines) {
+            if (r.getExercises().size() > 0)
+                Log.d("Routine", r.getExercises().get(0).getName());
+        }
 
 
     }

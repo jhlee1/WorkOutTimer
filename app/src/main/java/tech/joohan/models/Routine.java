@@ -49,6 +49,7 @@ public class Routine implements Parcelable {
 
     public Routine(String name) {
         this.name = name;
+        this.exercises = new ArrayList<>();
     }
 
     public Routine(String name, List<Exercise> exercises) {
