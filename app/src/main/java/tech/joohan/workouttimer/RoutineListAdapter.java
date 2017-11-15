@@ -52,7 +52,7 @@ public class RoutineListAdapter extends BaseAdapter {
             @Override
             public void onClick(View view) {
                 Intent routineIntent = new Intent(v.getContext(), RoutineActivity.class);
-                routineIntent.putExtra("routine",routines.get(selectedRoutineIndex));
+                routineIntent.putExtra("routineIndex",selectedRoutineIndex);
                 routineIntent.putParcelableArrayListExtra("routines", (ArrayList<? extends Parcelable>) routines);
                 v.getContext().startActivity(routineIntent);
             }
@@ -74,9 +74,6 @@ public class RoutineListAdapter extends BaseAdapter {
                 notifyDataSetChanged();
             }
         });
-
-
-//        ImageView deleteButton = (ImageView) v.findViewById(R.id.deleteRoutine);
         return v;
     }
 

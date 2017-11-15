@@ -28,6 +28,10 @@ public class Exercise implements Parcelable{
     public Exercise( String name) {
         this.name = name;
     }
+    public Exercise(String name, String desc) {
+        this.description = desc;
+        this.name = name;
+    }
 
     public Exercise() {
     }

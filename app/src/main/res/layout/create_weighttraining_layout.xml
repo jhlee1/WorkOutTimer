@@ -3,7 +3,27 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:layout_margin="10dp"
+    android:layout_marginTop="20dp"
+
     >
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="What is the name of the exercise?"/>
+
+    <EditText
+        android:id="@+id/exerciseNameInput"
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginRight="4dp"
+        android:layout_marginBottom="4dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:imeOptions="actionNext"
+        android:inputType="text" />
+
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -19,6 +39,7 @@
         android:layout_height="wrap_content"
         android:digits="0123456789"
         android:ems="10"
+        android:imeOptions="actionNext"
         android:inputType="number" />
 
     <TextView
@@ -35,8 +56,9 @@
         android:layout_marginLeft="4dp"
         android:layout_marginRight="4dp"
         android:layout_marginBottom="4dp"
-        android:text="ex) 10,10,13,12"
-        android:inputType="text" />
+        android:hint="ex) 10,10,13,12"
+        android:imeOptions="actionNext"
+        android:inputType="number" />
 
     <TextView
         android:layout_width="match_parent"
@@ -52,8 +74,9 @@
         android:layout_marginRight="4dp"
         android:layout_marginBottom="4dp"
         android:digits="0123456789,"
-        android:text="ex) 10,10,13,12"
-        android:inputType="text" />
+        android:hint="ex) 10,10,13,12"
+        android:imeOptions="actionNext"
+        android:inputType="number" />
 
     <TextView
         android:layout_width="match_parent"
@@ -69,7 +92,8 @@
         android:layout_marginRight="4dp"
         android:layout_marginBottom="4dp"
         android:digits="0123456789,"
-        android:text="ex) 10,10,13,12"
+        android:hint="ex) 10,10,13,12"
+        android:imeOptions="actionNext"
         android:inputType="number" />
 
     <TextView
@@ -86,7 +110,30 @@
         android:layout_marginRight="4dp"
         android:layout_marginBottom="4dp"
         android:digits="0123456789,"
-        android:text="ex) 10,10,13,12"
+        android:hint="ex) 10,10,13,12"
+        android:imeOptions="actionNext"
         android:inputType="number" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="(Optional) Description"/>
+
+    <EditText
+        android:id="@+id/descriptionInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginRight="4dp"
+        android:layout_marginBottom="4dp"
+        android:imeOptions="actionDone"
+        android:inputType="text" />
+
+    <Button
+        android:id="@+id/createExerciseButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Create"
+        style="@style/blueButton"/>
 
 </LinearLayout>
