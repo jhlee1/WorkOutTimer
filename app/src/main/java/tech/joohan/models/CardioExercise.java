@@ -8,4 +8,7 @@ public class CardioExercise extends Exercise {
     int mins;
     int secs;
 
+    protected CardioExercise(Parcel in) {
+        super(in);
+    }
 }

@@ -49,7 +49,6 @@ public class RoutineListActivity extends Activity {
             String input = null;
             if (s.hasNext()) {
                 input = s.useDelimiter("\\A").next();
-
                 routines = gson.fromJson(input, listType);
             } else {
                 routines = new ArrayList<>();
@@ -66,12 +65,6 @@ public class RoutineListActivity extends Activity {
 
             }
         }
-        //Just for testing purpose
-        Routine tmp = new Routine("Testing1");
-        Exercise tmp2 = new WeightTraining();
-        tmp2.setName("Test Exercise");
-        tmp.getExercises().add(tmp2);
-        routines.add(tmp);
 
         ListView listView = (ListView) findViewById(R.id.routineList);
         routineListAdapter = new RoutineListAdapter(this,routines);
@@ -85,6 +78,13 @@ public class RoutineListActivity extends Activity {
                 createRoutineDialog.show();
             }
         });
+        //Just for testing purpose
+//        Routine tmp = new Routine("Testing1");
+//        Exercise tmp2 = new WeightTraining("Exercise1");
+//        tmp2.setName("Test Exercise");
+//        tmp.getExercises().add(tmp2);
+//        routines.add(tmp);
+
 
 
     }
