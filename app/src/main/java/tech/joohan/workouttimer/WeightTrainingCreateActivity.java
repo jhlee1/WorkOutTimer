@@ -29,7 +29,6 @@ public class WeightTrainingCreateActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.create_weighttraining_layout);
-
         final Intent intent = getIntent();
         routineIndex = intent.getIntExtra("routineIndex",9999);
         final ArrayList<Routine> routines = intent.getParcelableArrayListExtra("routines");
@@ -61,16 +60,10 @@ public class WeightTrainingCreateActivity extends Activity {
                 routines.get(routineIndex).getExercises().add(wt);
                 Gson gson = new Gson();
                 String jsonString = gson.toJson(routines);
-                Log.d("RoutinesJSON", " "+ jsonString );
                 try {
                     FileOutputStream outputStream = openFileOutput(getResources().getString(R.string.routine_filename), view.getContext().MODE_PRIVATE);
                     outputStream.write(jsonString.getBytes());
                     outputStream.close();
-//                        Log.d("Exercise", "The name of Exercise is " + wt.getName());
-//                        Log.d("Exercise", "The reps of Exercise is " + wt.getRepetition().size());
-//                        Log.d("Exercise", "The sets of Exercise is " + wt.getNumOfSets());
-//                        Log.d("Exercise", "The weights of Exercise is " + wt.getWeights().get(0));
-//                        Log.d("Exercise", "The time of Exercise is " + wt.getTimeForWorkout().get(0));
                 } catch(IOException e) {
                     Log.d("IOException", "Failed to write json");
                 }
@@ -103,34 +96,4 @@ public class WeightTrainingCreateActivity extends Activity {
     }
 
 
-
-//    //Another option to get input ... to create another dialog box
-//    private Dialog createDialog() {
-//                .setPositiveButton(R.string.create, new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialogInterface, int i){
-//                        //Save to DB
-////                        EditText routineInput = (EditText) createRoutineDialog.findViewById(R.id.routineInput);
-////                        routines.add(new Routine(routineInput.getText().toString()));
-////                        String jsonString = gson.toJson(routines);
-////                        try {
-////                            FileOutputStream outputStream = openFileOutput(routineFileName,getContext().MODE_PRIVATE);
-////                            outputStream.write(jsonString.getBytes());
-////                            outputStream.close();
-////                        } catch (IOException e ) {
-////                            Log.d("FileNotFound", "Fails to write a new routine");
-////                        }
-////                        ListView lv = (ListView) findViewById(R.id.routineList);
-////                        lv.invalidate();
-//                    }
-//                })
-//                .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialogInterface, int i) {
-//                        //Cancel
-//                        createExerciseDialog.cancel();
-//                    }
-//                });
-//        return builder.create();
-//    }
 }
