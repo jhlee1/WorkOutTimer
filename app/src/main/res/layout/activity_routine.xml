@@ -49,13 +49,10 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:orientation="vertical">
-            <ListView
-                android:id="@+id/routineList"
-                android:divider="@color/white"
-                android:dividerHeight="5dp"
-                android:background="@color/mainActivityBackground"
+            <ExpandableListView
+                android:id="@+id/exerciseList"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+                android:layout_height="match_parent"></ExpandableListView>
 
         </LinearLayout>
 
