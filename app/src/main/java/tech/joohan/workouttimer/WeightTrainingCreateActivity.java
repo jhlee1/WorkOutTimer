@@ -19,12 +19,21 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import tech.joohan.models.Routine;
 import tech.joohan.models.WeightTraining;
 
 public class WeightTrainingCreateActivity extends Activity {
     private int routineIndex;
+    private EditText name;
+    private EditText numOfSets;
+    private EditText repsOfSets;
+    private EditText breaksOfSets;
+    private EditText weightsOfSets;
+    private EditText timesOfSets;
+    private EditText description;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,18 +41,19 @@ public class WeightTrainingCreateActivity extends Activity {
         final Intent intent = getIntent();
         routineIndex = intent.getIntExtra("routineIndex",9999);
         final ArrayList<Routine> routines = intent.getParcelableArrayListExtra("routines");
+        name  = (EditText) findViewById(R.id.exerciseNameInput);
+        numOfSets = (EditText) findViewById(R.id.numOfSetsInput);
+        repsOfSets = (EditText) findViewById(R.id.repsForEachSetInput);
+        breaksOfSets = (EditText) findViewById(R.id.breakForEachSetInput);
+        weightsOfSets = (EditText) findViewById(R.id.weightsForEachSetInput);
+        timesOfSets = (EditText) findViewById(R.id.timeForEachSetInput);
+        description = (EditText) findViewById(R.id.descriptionInput);
         Button b = (Button) findViewById(R.id.createExerciseButton);
         b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Add a validations for empty input and num,num,num ....
-                EditText name = (EditText) findViewById(R.id.exerciseNameInput);
-                EditText numOfSets = (EditText) findViewById(R.id.numOfSetsInput);
-                EditText repsOfSets = (EditText) findViewById(R.id.repsForEachSetInput);
-                EditText breaksOfSets = (EditText) findViewById(R.id.breakForEachSetInput);
-                EditText weightsOfSets = (EditText) findViewById(R.id.weightsForEachSetInput);
-                EditText timesOfSets = (EditText) findViewById(R.id.timeForEachSetInput); // Add enter listener so the user does not have to click create by entering
-                EditText description = (EditText) findViewById(R.id.descriptionInput);
+                if(!validationChecker())
+                    return;
                 int sets = Integer.parseInt(numOfSets.getText().toString());
                 List<Integer> reps = readIntListFromEditTextInput(repsOfSets, new LinkedList<Integer>());
                 List<Integer> breaks = readIntListFromEditTextInput(breaksOfSets, new LinkedList<Integer>());
@@ -95,5 +105,45 @@ public class WeightTrainingCreateActivity extends Activity {
         return list;
     }
 
+    private boolean validationChecker() {
+        String s = "\\d+(,{1}\\d+)*";
+        if (name.getText().toString().isEmpty()) {
+            name.setError("Please fill out this field");
+            return false;
+        } else {
+            name.setError(null);
+        }
+        if (numOfSets.getText().toString().isEmpty()) {
+            numOfSets.setError("Please fill out this field");
+            return false;
+        } else{
+            numOfSets.setError(null);
+        }
+        if(!Pattern.matches(s,repsOfSets.getText().toString()) || repsOfSets.getText().toString().isEmpty()) {
+            repsOfSets.setError("Please split by ,");
+            return false;
+        } else {
+            repsOfSets.setError(null);
+        }
+        if(!breaksOfSets.getText().toString().matches(s) || breaksOfSets.getText().toString().isEmpty()) {
+            breaksOfSets.setError("Please split by ,");
+            return false;
+        } else {
+            breaksOfSets.setError(null);
+        }
+        if(!weightsOfSets.getText().toString().isEmpty() && !weightsOfSets.getText().toString().matches(s)) {
+            weightsOfSets.setError("Please split by ,");
+            return false;
+        } else {
+            weightsOfSets.setError(null);
+        }
+        if(!timesOfSets.getText().toString().isEmpty() && !timesOfSets.getText().toString().matches(s)) {
+            timesOfSets.setError("Please split by ,");
+            return false;
+        } else {
+            timesOfSets.setError(null);
+        }
 
+        return true;
+    }
 }

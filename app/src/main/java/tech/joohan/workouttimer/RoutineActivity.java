@@ -8,15 +8,29 @@ import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
-import java.util.ArrayList;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.Scanner;
+
+import tech.joohan.models.Exercise;
 import tech.joohan.models.Routine;
 
 public class RoutineActivity extends Activity {
     private int routineIndex;
+    private ArrayList<Routine> routines;
     private Dialog createExerciseDialog;
+    private String routineFileName;
+    private Gson gson;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,10 +38,8 @@ public class RoutineActivity extends Activity {
         Intent intent = getIntent();
         routineIndex = intent.getIntExtra("routineIndex",9999);
         TextView routineName = (TextView) findViewById(R.id.routineName);
-        final ArrayList<Routine> routines = intent.getParcelableArrayListExtra("routines");
+        routines = intent.getParcelableArrayListExtra("routines");
         routineName.setText(routines.get(routineIndex).getName());
-
-
         ImageView addExerciseButton = (ImageView) findViewById(R.id.addExercise);
         addExerciseButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -36,10 +48,35 @@ public class RoutineActivity extends Activity {
                 routineIntent.putExtra("routineIndex",routineIndex);
                 routineIntent.putParcelableArrayListExtra("routines",routines);
                 view.getContext().startActivity(routineIntent);
-
-
             }
         });
+        routineFileName = getResources().getString(R.string.routine_filename);
+        FileInputStream inputStream = null;
+        gson = new GsonBuilder().create();
+        try {
+            inputStream = this.openFileInput(routineFileName);
+            Scanner s = new Scanner(inputStream);
+            Type listType = new TypeToken<ArrayList<Routine>>(){}.getType();
+            String input = null;
+            if (s.hasNext()) {
+                input = s.useDelimiter("\\A").next();
+                routines = gson.fromJson(input, listType);
+            } else {
+                routines = new ArrayList<>();
+            }
+        } catch (IOException e ) {
+                Log.d("outputstream exception", "Fail to create a routine file");
+        }
+        for(Routine r : routines) {
+            Log.d("JSONREADING", r.getName());
+            for(Exercise e : r.getExercises()) {
+                Log.d("JSONREADING", e.getName());
+            }
+        }
+//        ListView listView = (ListView) findViewById(R.id.routineList);
+//        routineListAdapter = new RoutineListAdapter(this,routines);
+//        listView.setAdapter(routineListAdapter);
+
     }
 
 }
