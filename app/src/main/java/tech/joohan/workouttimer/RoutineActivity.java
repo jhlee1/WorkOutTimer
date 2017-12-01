@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
+import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -40,6 +41,10 @@ public class RoutineActivity extends Activity {
         TextView routineName = (TextView) findViewById(R.id.routineName);
         routines = intent.getParcelableArrayListExtra("routines");
         routineName.setText(routines.get(routineIndex).getName());
+
+        /**
+         * Add an exercise to the routine
+         */
         ImageView addExerciseButton = (ImageView) findViewById(R.id.addExercise);
         addExerciseButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,12 +76,34 @@ public class RoutineActivity extends Activity {
             Log.d("JSONREADING", r.getName());
             for(Exercise e : r.getExercises()) {
                 Log.d("JSONREADING", e.getName());
+                Log.d("JSONREADING", e.getDescription());
             }
         }
-//        ListView listView = (ListView) findViewById(R.id.routineList);
-//        routineListAdapter = new RoutineListAdapter(this,routines);
-//        listView.setAdapter(routineListAdapter);
 
+        /**
+         * Implementing expandable list to show the exercises belong to this routine
+         */
+
+        ExpandableListView exerciseListView = (ExpandableListView) findViewById(R.id.exerciseList);
+        ExerciseListAdapter exerciseListAdapter = new ExerciseListAdapter(this,routines.get(routineIndex).getExercises(),routines.get(routineIndex).exercisesToListForm());
+        exerciseListView.setAdapter(exerciseListAdapter);
+        exerciseListView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
+            @Override
+            public boolean onGroupClick(ExpandableListView expandableListView, View view, int i, long l) {
+                return false;
+            }
+        });
+        exerciseListView.setOnGroupCollapseListener(new ExpandableListView.OnGroupCollapseListener() {
+            @Override
+            public void onGroupCollapse(int i) {
+
+            }
+        });
+        exerciseListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+            @Override
+            public boolean onChildClick(ExpandableListView expandableListView, View view, int i, int i1, long l) {
+                return false;
+            }
+        });
     }
-
 }

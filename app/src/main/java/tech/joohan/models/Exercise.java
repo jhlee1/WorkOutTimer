@@ -3,6 +3,10 @@ package tech.joohan.models;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.util.Log;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Exercise implements Parcelable{
     protected String name;
@@ -58,5 +62,12 @@ public class Exercise implements Parcelable{
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeString(this.name);
         parcel.writeString(this.description);
+    }
+    public List<String> propertiesToList() {
+        ArrayList<String> properties = new ArrayList<>();
+        properties.add(this.name);
+        properties.add(this.description);
+        Log.d("ExerciseProperty","E1");
+        return properties;
     }
 }

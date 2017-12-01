@@ -2,6 +2,7 @@ package tech.joohan.models;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.util.Log;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -77,9 +78,41 @@ public class WeightTraining extends Exercise implements Parcelable {
         parcel.writeList(this.timeForWorkout);
         parcel.writeList(this.timeForBreak);
         parcel.writeList(this.repetition);
-        parcel.writeInt(numOfSets);
+        parcel.writeInt(this.numOfSets);
 
     }
+    @Override
+    public List<String> propertiesToList() {
+        Log.d("ExerciseProperty","W1");
+        ArrayList<String> properties = new ArrayList<>();
+        properties.add(this.name);
+        properties.add(this.description);
+        properties.add(floatListToString(this.weights));
+        properties.add(intListToString(this.timeForBreak)); //Try changing to String.join (" ", ArrayList);
+        if (!this.timeForWorkout.isEmpty())
+            properties.add(intListToString(this.timeForWorkout));
+        if(!this.repetition.isEmpty())
+            properties.add(intListToString(this.repetition));
+
+        return properties;
+    }
+
+    private String floatListToString (List<Float> inputList ) {
+        StringBuilder sb = new StringBuilder();
+        for(Float f : inputList) {
+            sb.append(f+" ");
+        }
+        return sb.toString();
+    }
+
+    private String intListToString (List<Integer> inputList ) {
+        StringBuilder sb = new StringBuilder();
+        for(Integer i : inputList) {
+            sb.append(i+" ");
+        }
+        return sb.toString();
+    }
+
     public static final Creator<WeightTraining> CREATOR = new Creator<WeightTraining>() {
         @Override
         public WeightTraining createFromParcel(Parcel in) {
@@ -91,6 +124,12 @@ public class WeightTraining extends Exercise implements Parcelable {
             return new WeightTraining[size];
         }
     };
+
+    /**
+     * Builder pattern for readability
+     * Too many parameters for constructor
+     */
+
     public static Builder builder(){
         return new Builder();
     }

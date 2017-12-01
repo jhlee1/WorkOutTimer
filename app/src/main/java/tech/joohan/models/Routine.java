@@ -2,9 +2,11 @@ package tech.joohan.models;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.util.Log;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class Routine implements Parcelable {
@@ -66,5 +68,15 @@ public class Routine implements Parcelable {
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeString(this.name);
         parcel.writeList(this.exercises);
+    }
+    public HashMap<Exercise,List<String>> exercisesToListForm () {
+        HashMap<Exercise,List<String>> exerciseListHashMap = new HashMap<>();
+            for(Exercise e : this.exercises) {
+                exerciseListHashMap.put(e,e.propertiesToList());
+                for(String s : e.propertiesToList()) {
+                    Log.d("ExerciseProperty", s);
+                }
+            }
+        return exerciseListHashMap;
     }
 }

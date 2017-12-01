@@ -49,6 +49,7 @@ public class RoutineListActivity extends Activity {
             String input = null;
             if (s.hasNext()) {
                 input = s.useDelimiter("\\A").next();
+                Log.d("FROMINPUTFILE", input);
                 routines = gson.fromJson(input, listType);
             } else {
                 routines = new ArrayList<>();
@@ -64,6 +65,7 @@ public class RoutineListActivity extends Activity {
                 Log.d("outputstream exception", "Fail to create a routine file");
 
             }
+            routines = new ArrayList<>();
         }
 
         ListView listView = (ListView) findViewById(R.id.routineList);
